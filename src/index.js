@@ -1,50 +1,86 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom';
-import './styles.css'
+
+
+import {
+  FieldForm,
+  BDText,
+  Field,
+  BinaryInput,
+  StyledTitle,
+  DecimalOutput,
+  BotaoBonito
+} from './components/layouts/styles'
 
 function App(){
-const [entrada, setEntrada] = useState("")
-const [saida, setSaida] = useState("")
-const [erro, setErroM] = useState("")
+ const [binaryText, setBinaryText] = useState("")
+ const [decimalText, setDecimalText] = useState("")
+ const [errorText, setErrorText] = useState("")
 
-const botarSobrenome = e =>{
-  e.preventDefault()
+  const converter = e =>{
+    e.preventDefault()
 
-  const nome = entrada.concat(" de Adrade Fagundes é muito gato")
-  setSaida(nome)
+    if( binaryText.match(/^[0-1]+$/g) === null){
+      
+      return
+    }
 
-  if (entrada.match(/^[0-1]+$/g) === null) {
-    setErroM('Enter either 0 or 1')
-    return
+
+    const valorInvertido = binaryText.split("").reverse().map(Number) 
+
+    const somarBinarios = (acumulador, atual, index) =>{ 
+         return acumulador + atual*Math.pow(2,index) 
+    }
+  
+    const resultado = valorInvertido.reduce(somarBinarios)      
+    setDecimalText(resultado)
   }
 
-}
+
+  return (
+    <>
+    <StyledTitle>Conversor de Binário para Decimal</StyledTitle>
+    <FieldForm onSubmit = {converter} >
 
 
-return(
-  <>
-  <form onSubmit = {botarSobrenome}>
-    <input 
-      name="Entrada"
-      className="inputDoG"
-      value={entrada}
-      placeholder="Nome para completar com sobrenome do Gustavo"
-      onChange={ e => setEntrada(e.target.value) }
-    />
-    <br/>
-    <input
-      name="saida"
-      className="saida"
-      value = {saida}
-      placeholder = "Nome completo!"
-    
-    />
-    <br/>
-    <button type="submit">Adicionar!</button>
-  </form>
+      <br/>
 
-  </>
-)
+      <Field>
+
+      <BDText> Binary Input </BDText>
+
+      <div>
+      <BinaryInput
+      
+      type="text"
+      value = {binaryText}
+      onChange = {e => setBinaryText(e.target.value)}
+      placeholder="Insira 0 ou 1"
+      
+      /> 
+      <BotaoBonito type="submit">Converter!</BotaoBonito>
+
+      </div>
+      
+      </Field>
+      
+
+      <Field>
+      <BDText> Decimal Output </BDText>
+     
+      <DecimalOutput 
+      type="text"
+      name="DecimalText"
+      value = {decimalText}
+      disabled= "off"
+
+      />
+      </Field>
+      
+
+    </FieldForm>
+    </>
+  )
 
 }
 
