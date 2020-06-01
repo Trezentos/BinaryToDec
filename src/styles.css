@@ -1,0 +1,13 @@
+.inputDoG{
+    width: 300px;
+    border: black solid 1px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.saida{
+    width: 300px;
+    border: black solid 1px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
