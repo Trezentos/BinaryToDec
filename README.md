@@ -1,2 +1,4 @@
-
-Meu primeiro projeto em react salvo no site codesandbox e usado junto com a  biblioteca de estilização da Styled-Components
+#Binary to Dec
+A simple binary to decimal converter made by using the framework React and some depencies as styled componets
+Check it out ;) !
+https://dtdge.csb.app/
